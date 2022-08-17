@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magazine - Add</title>
+</head>
+<body>
+  <h1>Magazine Add</h1>
+  <form action="/magazine/add" method="POST">
+    <label for="title">Title: </label>
+    <input type="text" name="title">
+    <br>
+    <label for="totalPage">Total Page: </label>
+    <input type="number" name="totalPage">
+    <br>
+    <label for="price">Price: </label>
+    <input type="number" name="price">
+    <br>
+    <label for="stock">Stock: </label>
+    <input type="number" name="stock">
+    <br>
+    <label for="">Publisher: </label>
+    <select name="PublisherId" id="">
+      <% for( const publisher of publishers ) { %>
+        <option value="<%= publisher.id %>"><%= publisher.nameOfPublisher %></option>
+      <% } %>
+    </select>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

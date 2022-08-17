@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publisher</title>
+</head>
+<body>
+  <h1>Publisher</h1>
+  <table border="1">
+    <tr>
+      <th>Name of Publisher : </th>
+      <th>Address of Publisher : </th>
+      <th>Phone of Publisher : </th>
+      <th>Action</th>
+    </tr>
+    <a href="/publisher/add">Add Publisher</a>
+    <% for( publisher of publishers ) { %>
+      <tr>
+        <td><%= publisher.nameOfPublisher %> </td>
+        <td><%= publisher.address %></td>
+        <td><%= publisher.phoneNumber %></td>
+        <td>
+          <a href="/publisher/edit/<%= publisher.id %>">Edit</a>
+          <a href="/publisher/delete/<%= publisher.id %>">Delete</a>
+        </td>
+      </tr>
+    <% } %>
+  </table>
+  <a href="/logout">Logout</a>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magazine</title>
+</head>
+<body>
+  <h1>Magazine</h1>
+  <a href="/magazine/add">Add</a>
+  <table border="1">
+    <tr>
+      <th>Magazine</th>
+      <th>Total Page</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Publisher</th>
+      <th>Action</th>
+    </tr>
+    <% for(const magazine of magazines) { %>
+      <tr>
+        <td><%= magazine.title %></td>
+        <td><%= magazine.totalPage %></td>
+        <td><%= magazine.price %></td>
+        <td><%= magazine.stock %></td>
+        <td><%= magazine.Publisher.nameOfPublisher %></td>
+        <td>
+          <a href="/magazine/edit/<%= magazine.id %>">Edit</a>
+          <a href="/magazine/delete/<%= magazine.id %>">Delete</a>
+        </td>
+      </tr>
+    <% } %>
+  </table>
+</body>
+</html>

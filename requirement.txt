@@ -1,0 +1,48 @@
+https://01pin.notion.site/Requirement-PAIR-PROJECT-PP-e8dd4435c81c42a7859c537c5148ec2e
+
+## Level Database
+
+1. Schema table / ERD 
+2. Terdapat entitas wajib yaitu Users 
+     dengan attribute wajib-nya : 
+     - email 
+     - password
+     - role
+3. Memiliki 2 asosiasi yang berbeda :  
+
+- -  One to One  1:1  ✅
+  User - Profile 
+  Product - ProductDetail
+  Country - Capital
+-  One to Many 1:N
+-  Many to Many M:N
+
+4. Membuat migrasi tambahan
+
+### Routes
+
+1. Minimal terdapat 2 route get dan 1 route post
+2. Terdapat route untuk logout
+
+### Level Aplikasi
+
+1. Terdapat fitur Search atau Sort
+2. Terdapat Static method & Instance method 
+3. Menggunakan berbagai macam Validasi dari Sequelize
+4. Menggunakan method-method sequelize yang bertujuan untuk CRUD
+5. Hooks
+6. Helper 
+
+### Pages
+
+1. Landing Page (menggambarkan project)
+2. Register & Login Page
+3. Memiliki 1 halaman view yang menampilkan 
+    data gabungan dari 2 tabel atau lebih.
+
+### Explore
+
+1. Membuat sistem login dengan Middleware, Session & Bcryptjs.
+2. Membuat MVP  (minimal 1 package lain) 
+    sebagai fitur tambahan dalam web-app pair projectmu.
+3. Mendeploy pair project ke cloud (pakai Heroku)

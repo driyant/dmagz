@@ -27,7 +27,7 @@
       <tr>
         <td><%= magazine.title %></td>
         <td><%= magazine.totalPage %></td>
-        <td><%= magazine.price %></td>
+        <td><%= magazine.currencyIDR() %></td>
         <td><%= magazine.stock %></td>
         <td><%= magazine.Publisher.nameOfPublisher %></td>
         <% if (userRole === "admin") { %>
@@ -36,7 +36,9 @@
             <a href="/magazine/delete/<%= magazine.id %>">Delete</a>
           </td>
         <% } else { %>
-          <td>Buy</td>
+          <td>
+            <a href="/magazine/buy/<%= magazine.id %>">Buy</a>
+          </td>
         <% } %>
       </tr>
     <% } %>

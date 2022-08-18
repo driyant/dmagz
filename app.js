@@ -6,14 +6,14 @@ const session = require("express-session");
 
 
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(session({
-  secret : 'hehehe',
-  resave : false,
-  saveUninitialized : true,
-  cookie : { 
-    secure : false,
-    sameSite : true
+  secret: 'hehehe',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    sameSite: true
   }
 }));
 
@@ -33,7 +33,7 @@ app.post("/register", Register.addProcess);
 
 app.use((req, res, next) => {
   console.log(req.session)
-  if(!req.session.userId) {
+  if (!req.session.userId) {
     const error = 'Please login first!';
     res.redirect(`/login?error=${error}`);
   }
@@ -55,6 +55,8 @@ app.post("/magazine/add", Magazines.addProcess);
 app.get("/magazine/edit/:id", Magazines.edit);
 app.post("/magazine/edit/:id", Magazines.editProcess);
 app.get("/magazine/delete/:id", Magazines.delete);
+app.get("/magazine/buy/:id", Magazines.buy);
+
 
 app.listen(port, () => {
   console.log('Running on port', port);

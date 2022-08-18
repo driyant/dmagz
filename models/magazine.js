@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "PublisherId"
       })
     }
+    currencyIDR() {
+      return Intl.NumberFormat('id-ID', { style: "currency", currency: "IDR" }).format(this.price)
+    }
   }
   Magazine.init({
     title: {

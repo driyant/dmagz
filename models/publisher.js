@@ -17,9 +17,50 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Publisher.init({
-    nameOfPublisher: DataTypes.STRING,
-    address: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING
+    nameOfPublisher: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'name of publisher cannot be null'
+        },
+        notEmpty: {
+          msg: 'name of publisher cannot be empty'
+        }
+      }
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'address cannot be null'
+        },
+        notEmpty: {
+          msg: 'address cannot be empty'
+        }
+      }
+    },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isNumeric: {
+          msg: 'phone number can only be number'
+        },
+        notNull: {
+          msg: 'phone number cannot be null'
+        },
+        notEmpty: {
+          msg: 'phone number cannot be empty'
+        },
+        minimumPhoneNumber(value) {
+          if (value.length < 8 || value.length > 14) {
+            throw new Error('Phone number need 8 number as minimum and 14 number as maximum')
+          }
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Publisher',

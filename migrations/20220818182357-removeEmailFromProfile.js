@@ -12,6 +12,7 @@ module.exports = {
   },
 
   down(queryInterface, Sequelize) {
+    return queryInterface.removeColumn('Profiles', 'email', {})
     /**
      * Add reverting commands here.
      *

@@ -59,6 +59,21 @@ module.exports = (sequelize, DataTypes) => {
           msg: "role cannot be empty"
         }
       }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "email cannot be null"
+        },
+        notEmpty: {
+          msg: "email cannot be empty"
+        },
+        isEmail: {
+          msg: "email has to be email format"
+        }
+      }
     }
   }, {
     sequelize,

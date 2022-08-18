@@ -15,6 +15,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "UserId"
       })
     }
+    get blurredAccountNumber(){
+      const blurred = this.accountNumber.split("")
+      blurred[0] = "X"
+      blurred[1] = "X"
+      blurred[2] = "X"
+      return blurred.join("");
+    }
   }
   Profile.init({
     fullName: DataTypes.STRING,

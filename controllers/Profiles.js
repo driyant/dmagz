@@ -6,9 +6,15 @@ class Profiles {
     User.findByPk(1, {
       include: [Profile]
     })
-      .then((result) => {
-        console.log(result);
-        res.send(result);
+      .then((profile) => {
+        console.log(profile.Profile.accountNumber);
+        // res.send(result);
+        const blurred = profile.Profile.accountNumber.split("")
+        blurred[0] = "x"
+        blurred[1] = "x"
+        blurred[2] = "x"
+        console.log(blurred.join(""));
+        res.render("profile", {profile})
       })
       .catch(err => {
         console.log(err)

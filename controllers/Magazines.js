@@ -1,26 +1,40 @@
 const { Magazine, Publisher } = require("../models");
+const { Op } = require("sequelize");
 
 class Magazines {
   static index(req, res) {
-    Magazine.findAll({
-      include : Publisher,
-    })
-    .then((magazines) => {
-      console.log(magazines);
-      res.render("magazine", {magazines});
-    })
-    .catch(err => {
-      res.send(err);
-    }) 
+    console.log(req.query)
+    let key = req.query.keywords
+    let option = {
+      include: Publisher,
+    }
+    // console.log(key)
+    if (key) {
+      option.where = {
+        title: {
+          [Op.iLike]: `%${key}%`
+        }
+      }
+    }
+    // console.log(key)
+    Magazine.findAll(option)
+      .then((magazines) => {
+        // console.log(magazines);
+        res.render("magazine", { magazines });
+      })
+      .catch(err => {
+        console.log(err)
+        res.send(err);
+      })
   }
   static add(req, res) {
     Publisher.findAll({})
-    .then((publishers) => {
-      res.render("magazineAdd", { publishers });
-    })
-    .catch(err => {
-      res.send(err);
-    })
+      .then((publishers) => {
+        res.render("magazineAdd", { publishers });
+      })
+      .catch(err => {
+        res.send(err);
+      })
   }
   static addProcess(req, res) {
     // console.log(req.body);
@@ -28,34 +42,34 @@ class Magazines {
     Magazine.create({
       title, totalPage, price, stock, PublisherId
     })
-    .then(() => {
-      res.redirect("/magazine");
-    })
-    .catch(err => {
-      res.send(err);
-    })
+      .then(() => {
+        res.redirect("/magazine");
+      })
+      .catch(err => {
+        res.send(err);
+      })
   }
   static edit(req, res) {
     const { id } = req.params;
     Publisher.findAll({
     })
-    .then((publishers) => {
-      return publishers;
-    })
-    .then((publishers) => {
-      Magazine.findOne({
-        include : Publisher,
-        where : {
-          id : Number(id)
-        }
+      .then((publishers) => {
+        return publishers;
       })
-      .then(magazine => {
-        res.render("magazineEdit", {publishers, magazine});
+      .then((publishers) => {
+        Magazine.findOne({
+          include: Publisher,
+          where: {
+            id: Number(id)
+          }
+        })
+          .then(magazine => {
+            res.render("magazineEdit", { publishers, magazine });
+          })
       })
-    })
-    .catch(err => {
-      res.send(err);
-    })
+      .catch(err => {
+        res.send(err);
+      })
   }
   static editProcess(req, res) {
     const { title, totalPage, price, stock, PublisherId } = req.body;
@@ -63,30 +77,30 @@ class Magazines {
     Magazine.update({
       title, totalPage, price, stock, PublisherId
     }, {
-      where : {
+      where: {
         id: Number(id)
       }
     })
-    .then(() => {
-      res.redirect("/magazine");
-    })
-    .catch(err => {
-      res.send(err);
-    })
+      .then(() => {
+        res.redirect("/magazine");
+      })
+      .catch(err => {
+        res.send(err);
+      })
   }
   static delete(req, res) {
     const { id } = req.params;
     Magazine.destroy({
       where: {
-        id : id
+        id: id
       }
     })
-    .then(() => {
-      res.redirect("/magazine");
-    })
-    .catch(err => {
-      res.send(err);
-    })
+      .then(() => {
+        res.redirect("/magazine");
+      })
+      .catch(err => {
+        res.send(err);
+      })
   }
 }
 

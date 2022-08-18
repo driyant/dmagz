@@ -39,6 +39,10 @@ class Login {
       res.send(err);
     });
   }
+
+  static logoutSession(req ,res) {
+    
+  }
 }
 
 module.exports = Login;

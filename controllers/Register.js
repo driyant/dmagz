@@ -6,11 +6,13 @@ class Register {
     res.render("register");
   }
   static addProcess(req, res) {
-    const { username, password, role } = req.body;
+    const { username, password, role, email } = req.body;
+    console.log(req.body);
     User.create({
-      username : username,
-      password : password,
-      role : role
+      username ,
+      password,
+      email,
+      role
     })
     .then(() => {
       res.redirect("/");

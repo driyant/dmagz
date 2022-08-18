@@ -22,6 +22,7 @@ const Login = require("./controllers/Login");
 const Dashboard = require("./controllers/Dashboard");
 const Publishers = require("./controllers/Publishers");
 const Magazines = require("./controllers/Magazines");
+const Profiles = require("./controllers/Profiles");
 
 app.get("/", (req, res) => {
   res.redirect("/login");
@@ -30,6 +31,7 @@ app.get("/login", Login.index);
 app.post("/login", Login.loginProcess);
 app.get("/register", Register.index)
 app.post("/register", Register.addProcess);
+app.get("/profile", Profiles.index);
 
 app.use((req, res, next) => {
   console.log(req.session)

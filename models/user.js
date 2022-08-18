@@ -18,9 +18,47 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "username cannot be null"
+        },
+        notEmpty: {
+          msg: "username cannot be empty"
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "password cannot be null"
+        },
+        notEmpty: {
+          msg: "password cannot be empty"
+        },
+        minimumPassword(value) {
+          if (value.length < 3) {
+            throw new Error('password needs to have 3 minimal words')
+          }
+        }
+      }
+    },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "role cannot be null"
+        },
+        notEmpty: {
+          msg: "role cannot be empty"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'User',

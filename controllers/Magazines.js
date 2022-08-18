@@ -3,11 +3,16 @@ const { Op } = require("sequelize");
 
 class Magazines {
   static index(req, res) {
-    console.log(req.query)
+    // console.log(req.query.buy)
+    // let buy = req.query.buy
+    // console.log(buy)
     const userRole = req.session.userRole;
     let key = req.query.keywords
     let option = {
       include: Publisher,
+      order: [
+        ['id', 'ASC']
+      ]
     }
     // console.log(key)
     if (key) {
@@ -101,6 +106,27 @@ class Magazines {
       })
       .catch(err => {
         res.send(err);
+      })
+  }
+
+  static buy(req, res) {
+    const { id } = req.params;
+    Magazine.decrement({
+      stock: 1
+    }, {
+      where: {
+        id: {
+          [Op.eq]: id
+        }
+      }
+    })
+      .then(() => {
+        // nodemailer
+        res.redirect("/magazine");
+      })
+      .catch(err => {
+        console.log(err)
+        res.send(err)
       })
   }
 }

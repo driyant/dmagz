@@ -58,7 +58,7 @@ app.get("/magazine/edit/:id", Magazines.edit);
 app.post("/magazine/edit/:id", Magazines.editProcess);
 app.get("/magazine/delete/:id", Magazines.delete);
 app.get("/magazine/buy/:id", Magazines.buy);
-
+app.get("/logout", Login.logoutSession);
 
 app.listen(port, () => {
   console.log('Running on port', port);

@@ -30,10 +30,14 @@
         <td><%= magazine.price %></td>
         <td><%= magazine.stock %></td>
         <td><%= magazine.Publisher.nameOfPublisher %></td>
-        <td>
-          <a href="/magazine/edit/<%= magazine.id %>">Edit</a>
-          <a href="/magazine/delete/<%= magazine.id %>">Delete</a>
-        </td>
+        <% if (userRole === "admin") { %>
+          <td>
+            <a href="/magazine/edit/<%= magazine.id %>">Edit</a>
+            <a href="/magazine/delete/<%= magazine.id %>">Delete</a>
+          </td>
+        <% } else { %>
+          <td>Buy</td>
+        <% } %>
       </tr>
     <% } %>
   </table>

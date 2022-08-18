@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 
 class Login {
   static index(req, res) {
-    res.render("login");
+    const { error } = req.query;
+    res.render("login", { error });
   }
   static loginProcess(req, res) {
     console.log(req.body);
@@ -15,12 +16,22 @@ class Login {
       }
     })
     .then((user) => {
-      const isLoginSuccess = bcrypt.compareSync(password, user.password); // true
-      if (isLoginSuccess) {
-        res.redirect("/dashboard")
+      if (user) {
+        const isValidated = bcrypt.compareSync(password, user.password); // true
+        if (isValidated) {
+          req.session.userId = user.id;
+          req.session.username = user.username;
+          req.session.userRole = user.role;
+          return res.redirect("/dashboard");
+        }
+        else {
+          const errors = "Invalid username or password!";
+          return res.redirect(`/login?error=${errors}`);
+        }
       }
       else {
-        throw Error("Wrong password!");
+        const errors = "No username found 404!";
+        return res.redirect(`/login?error=${errors}`);
       }
     })
     .catch(err => {

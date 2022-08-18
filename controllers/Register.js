@@ -9,7 +9,7 @@ class Register {
     const { username, password, role } = req.body;
     User.create({
       username : username,
-      password : encrypt(password),
+      password : password,
       role : role
     })
     .then(() => {

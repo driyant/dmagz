@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 class Magazines {
   static index(req, res) {
     console.log(req.query)
+    const userRole = req.session.userRole;
     let key = req.query.keywords
     let option = {
       include: Publisher,
@@ -20,7 +21,7 @@ class Magazines {
     Magazine.findAll(option)
       .then((magazines) => {
         // console.log(magazines);
-        res.render("magazine", { magazines });
+        res.render("magazine", { magazines, userRole });
       })
       .catch(err => {
         console.log(err)

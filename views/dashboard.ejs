@@ -9,9 +9,14 @@
 <body>
   <h1>Dashboard</h1>
   <nav>
-    <a href="/publisher">Publisher</a>
-    <a href="/magazine">Magazine</a>
-    <a href="/profile/">Profile</a>
+    <% if (userRole === "admin") { %>
+      <a href="/publisher">Publisher</a>
+      <a href="/magazine">Magazine</a>
+      <a href="/profile/">Profile</a>
+    <% } else { %>
+      <a href="/magazine">Magazine</a>
+      <a href="/profile/">Profile</a>
+    <% } %>
   </nav>
   <a href="/logout">Logout</a>
 </body>
